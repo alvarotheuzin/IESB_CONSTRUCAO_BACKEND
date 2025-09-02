@@ -1,27 +1,43 @@
-const prompt = require('prompt-sync')();
+console.log("#### Projeto 02 - Calculadora de Nota #####")
 
-const n1 = prompt('Digite a nota da Prova 1: ');
-const n2 = prompt('Digite a nota da Prova 2: ');
+// importo e executo o prompt-sync
+let prompt = require('prompt-sync')()
 
-const prova1 = parseFloat(n1);
-const prova2 = parseFloat(n2);
+// Pergunta pro usuário o nome dele e
+// captura a resposta pra dentro da variavel nome
+let nome = prompt("Qual é o seu nome?")
 
-const media = prova1 * 0.4 + prova2 * 0.6;
+// usando o nome capturado
+console.log("Olá " + nome)
 
-console.log(`A Media da Prova 1: ${prova1} + a Prova 2: ${prova2} é igual a: ${media}`);
+// Calculo da nota do IESB baseado no peso
+let {calcularNotaA1, calcularNotaA2, calcularNotaFinal} = require('./CalculadoraNota')
 
-if (media >= 0 && media <= 4.9) {
-    console.log("MI")
+console.log("#### Calculando Nota A1 ####")
+let exercicioA1 = parseFloat(prompt("Qual a sua nota de exercícios? "))
+let trabalhoA1 = parseFloat(prompt("Qual a sua nota de trabalho? "))
+let provaA1 = parseFloat(prompt("Qual a sua nota de prova? "))
+let notaA1 = calcularNotaA1(exercicioA1, trabalhoA1, provaA1)
+
+console.log("Nota A1 calculada: " + notaA1)
+console.log("#### Finalizado calculo Nota A1 ####")
+
+console.log("#### Calculando Nota A2 ####")
+let exercicioA2 = parseFloat(prompt("Qual a sua nota de exercícios? "))
+let trabalhoA2 = parseFloat(prompt("Qual a sua nota de trabalho? "))
+let provaA2 = parseFloat(prompt("Qual a sua nota de prova? "))
+let notaA2 = calcularNotaA2(exercicioA2, trabalhoA2, provaA2)
+
+console.log("Nota A2 calculada: " + notaA2)
+console.log("#### Finalizado calculo Nota A2 ####")
+
+console.log("#### Calculando Média Final ####")
+let media = calcularNotaFinal(notaA1, notaA2)
+
+console.log("Média Final: " + media)
+
+if(media >= 5) {
+  console.log("Parabéns " + nome + ", você foi APROVADO!!!!!")
+} else {
+  console.log(nome + ", estude mais!!! Infelizmente você foi REPROVADO!!!!!")
 }
-else if (media >= 5 && media <= 6.9) {
-    console.log("MM")
-} 
-else if (media >= 7 && media <= 8.9) {
-    console.log("MS")
-}
-else if (media >= 9)  {
-    console.log("SS")
-}
-
-// devolve apenas a média como MM ou SS
-// dá a opção de saber a nota em valor, se não, agradece e fecha.
